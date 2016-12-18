@@ -1,0 +1,5 @@
+# JetBrain IDE
+.idea/*
+
+# Screeps Autocomplete
+ScreepsAutocomplete-master/*
