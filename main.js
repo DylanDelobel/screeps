@@ -36,6 +36,7 @@ module.exports.loop = function () {
 
         if (numberOfCreepsInRoom < 6) {
             Game.spawns.Master.createCreep([WORK, WORK, CARRY, MOVE], undefined, { energyFull: false })
+            Game.spawns.Spawn1.createCreep([WORK, WORK, CARRY, MOVE], undefined, { energyFull: false })
         }
     }
 }
