@@ -1,3 +1,4 @@
+require('prototype.spawn')();
 let taskGather = require('task.gather');
 let taskTransfer = require('task.transfer');
 
@@ -7,6 +8,7 @@ module.exports.loop = function () {
         // and checking if the creep is still alive
         if (Game.creeps[name] == undefined) {
             // if not, delete the memory entry
+            console.log(name + " Just died.")
             delete Memory.creeps[name];
         }
     }
@@ -28,14 +30,20 @@ module.exports.loop = function () {
     }
     // iterate over all the spawns
     for (let spawnName in Game.spawns) {
-
+        /** @type {Spawn} */
         let spawn = Game.spawns[spawnName];
+
         let creepsInRoom = spawn.room.find(FIND_MY_CREEPS);
 
         let numberOfCreepsInRoom = _.sum(creepsInRoom, (c) => c.memory.idk != 'idk');
 
         if (numberOfCreepsInRoom < 6) {
-            spawn.createCreep([WORK, WORK, CARRY, MOVE], undefined, { energyFull: false })
+            //spawn.spawnLargestCreep(300, 'miner')
+            let name = spawn.createLargestCreep(300, 'miner');
+
+            if (!(name < 0)) {
+                console.log(name + " Just spawn.");
+            }
         }
     }
 }
