@@ -1,30 +1,18 @@
+let jobs = require('./creeps.jobs');
+
 module.exports = function() {
     StructureSpawn.prototype.createLargestCreep =
         function (energy, jobName) {
 
-            const ROLES = {
-                miner: {
-                    template: [MOVE, WORK, CARRY],
-                    templateCost: 200,
-                    upgrade: [WORK],
-                    upgradeCost: 100,
-                },
-                builder: {
-                    template: [MOVE, WORK, CARRY],
-                    templateCost: 200,
-                    upgrade: [WORK],
-                    upgradeCost: 100,
-                }
-            };
-
             let body = [];
 
-            Array.prototype.push.apply(body, ROLES[jobName]['template']);
+            //Memory.spawns.Spawn1.test = jobs;
+            Array.prototype.push.apply(body, JOBS[jobName]['template']);
 
-            let energyLeft = energy - ROLES[jobName]['templateCost'];
+            let energyLeft = energy - JOBS[jobName]['templateCost'];
 
-            if (energyLeft <= ROLES[jobName]['upgradeCost']) {
-                Array.prototype.push.apply(body, ROLES[jobName]['upgrade']);
+            if (energyLeft <= JOBS[jobName]['upgradeCost']) {
+                Array.prototype.push.apply(body, JOBS[jobName]['upgrade']);
             }
 
             return this.createCreep(body, undefined, { job: jobName, energyFull: false});
