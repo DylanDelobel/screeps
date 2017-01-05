@@ -2,6 +2,8 @@ require('prototype.spawn')();
 let taskGather = require('task.gather');
 let taskTransfer = require('task.transfer');
 
+require('creeps.jobs');
+
 module.exports.loop = function () {
     // check for memory entries of died creeps by iterating over Memory.creeps
     for (let name in Memory.creeps) {
