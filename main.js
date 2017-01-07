@@ -1,6 +1,7 @@
 require('prototype.spawn')();
 let taskGather = require('task.gather');
 let taskTransfer = require('task.transfer');
+let taskBuilding = require('task.building');
 
 require('creeps.jobs');
 
@@ -27,7 +28,11 @@ module.exports.loop = function () {
         if (creep.memory.energyFull == false) {
             taskGather.run(creep);
         } else {
-            taskTransfer.run(creep);
+            if (creep.memory.job == 'miner') {
+                taskTransfer.run(creep);
+            } else {
+                taskBuilding.run(creep);
+            }
         }
     }
     // iterate over all the spawns
@@ -37,14 +42,22 @@ module.exports.loop = function () {
 
         let creepsInRoom = spawn.room.find(FIND_MY_CREEPS);
 
-        let numberOfCreepsInRoom = _.sum(creepsInRoom, (c) => c.memory.idk != 'idk');
+        let nbrCreepsMiner = _.sum(creepsInRoom, (c) => c.memory.job == 'miner');
+        let nbrCreepsBuilder = _.sum(creepsInRoom, (c) => c.memory.job == 'builder');
 
-        if (numberOfCreepsInRoom < 6) {
-            //spawn.spawnLargestCreep(300, 'miner')
+        if (nbrCreepsMiner < 5) {
+            console.log('tet');
             let name = spawn.createLargestCreep(300, 'miner');
 
             if (!(name < 0)) {
-                console.log(name + " Just spawn.");
+                console.log(name + " Just spawn. JOBS = miner");
+            }
+        }
+        if (nbrCreepsBuilder < 1) {
+            let name = spawn.createLargestCreep(300, 'builder');
+
+            if (!(name < 0)) {
+                console.log(name + " Just spawn. JOBS = builder");
             }
         }
     }
