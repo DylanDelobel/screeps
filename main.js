@@ -8,7 +8,7 @@ let taskRepair = require('task.repair');
 module.exports.loop = function () {
     if (Game.cpu.bucket < 500) {
         console.log("EMERGENCY! Bucket empty, skipping tick!");
-        Game.notify('Bucket is half empty ! optimize your code)
+        Game.notify('Bucket is half empty ! optimize your code');
         return;
     }
 
