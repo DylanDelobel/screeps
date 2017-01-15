@@ -1,11 +1,17 @@
 require('prototype.spawn')();
+require('creeps.jobs');
+
 let taskGather = require('task.gather');
 let taskTransfer = require('task.transfer');
 let taskRepair = require('task.repair');
 
-require('creeps.jobs');
-
 module.exports.loop = function () {
+    if (Game.cpu.bucket < 500) {
+        console.log("EMERGENCY! Bucket empty, skipping tick!");
+        Game.notify('Bucket is half empty ! optimize your code)
+        return;
+    }
+
     // check for memory entries of died creeps by iterating over Memory.creeps
     for (let name in Memory.creeps) {
         // and checking if the creep is still alive
@@ -46,14 +52,13 @@ module.exports.loop = function () {
         let nbrCreepsBuilder = _.sum(creepsInRoom, (c) => c.memory.job == 'builder');
 
         if (nbrCreepsMiner < 4) {
-            console.log('tet');
             let name = spawn.createLargestCreep(300, 'miner');
 
             if (!(name < 0)) {
                 console.log(name + " Just spawn. JOBS = miner");
             }
         }
-        if (nbrCreepsBuilder < 2) {
+        if (nbrCreepsBuilder < 1) {
             let name = spawn.createLargestCreep(300, 'builder');
 
             if (!(name < 0)) {
