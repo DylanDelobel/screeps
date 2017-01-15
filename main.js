@@ -17,7 +17,7 @@ module.exports.loop = function () {
         // and checking if the creep is still alive
         if (Game.creeps[name] == undefined) {
             // if not, delete the memory entry
-            console.log(name + " Just died.")
+            console.log('<span style="color:rgb(250,0,0)">' + name + ' Just died. </span>');
             delete Memory.creeps[name];
         }
     }
@@ -55,14 +55,13 @@ module.exports.loop = function () {
             let name = spawn.createLargestCreep(300, 'miner');
 
             if (!(name < 0)) {
-                console.log(name + " Just spawn. JOBS = miner");
+                console.log('<span style="color:rgb(0,250,0)">' + name + ' Just spawn. JOBS = miner </span>');
             }
-        }
-        if (nbrCreepsBuilder < 1) {
+        } else if (nbrCreepsBuilder < 1) {
             let name = spawn.createLargestCreep(300, 'builder');
 
             if (!(name < 0)) {
-                console.log(name + " Just spawn. JOBS = builder");
+                console.log('<span style="color:rgb(0,250,0)">' + name + ' Just spawn. JOBS = builder </span>');
             }
         }
     }
