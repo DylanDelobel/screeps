@@ -19,7 +19,7 @@ module.exports.loop = function () {
         if (Game.creeps[name] == undefined) {
             // if not, delete the memory entry
             if (Settings.CENSUS_LOG) {
-                console.log('<span style="color:rgb(250,0,0)">' + name + ' Just died. </span>');
+                console.log('<span style="color:#FA0000>' + name + ' Just died. </span>');
             }
             delete Memory.creeps[name];
         }
@@ -59,7 +59,7 @@ module.exports.loop = function () {
 
             if (!(name < 0)) {
                 if (Settings.CENSUS_LOG) {
-                    console.log('<span style="color:rgb(0,250,0)">' + name + ' Just spawn. JOBS = miner </span>');
+                    console.log('<span style="color:#00FA00>' + name + ' Just spawn. JOBS = miner </span>');
                 }
             }
         } else if (nbrCreepsBuilder < 1) {
@@ -67,7 +67,7 @@ module.exports.loop = function () {
 
             if (!(name < 0)) {
                 if (Settings.CENSUS_LOG) {
-                    console.log('<span style="color:rgb(0,250,0)">' + name + ' Just spawn. JOBS = builder </span>');
+                    console.log('<span style="color:#00FA00>' + name + ' Just spawn. JOBS = builder </span>');
                 }
             }
         }
