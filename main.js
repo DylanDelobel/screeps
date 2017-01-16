@@ -1,3 +1,4 @@
+require('settings');
 require('prototype.spawn')();
 require('creeps.jobs');
 
@@ -17,7 +18,9 @@ module.exports.loop = function () {
         // and checking if the creep is still alive
         if (Game.creeps[name] == undefined) {
             // if not, delete the memory entry
-            console.log('<span style="color:rgb(250,0,0)">' + name + ' Just died. </span>');
+            if (Settings.CENSUS_LOG) {
+                console.log('<span style="color:rgb(250,0,0)">' + name + ' Just died. </span>');
+            }
             delete Memory.creeps[name];
         }
     }
@@ -55,13 +58,17 @@ module.exports.loop = function () {
             let name = spawn.createLargestCreep(300, 'miner');
 
             if (!(name < 0)) {
-                console.log('<span style="color:rgb(0,250,0)">' + name + ' Just spawn. JOBS = miner </span>');
+                if (Settings.CENSUS_LOG) {
+                    console.log('<span style="color:rgb(0,250,0)">' + name + ' Just spawn. JOBS = miner </span>');
+                }
             }
         } else if (nbrCreepsBuilder < 1) {
             let name = spawn.createLargestCreep(300, 'builder');
 
             if (!(name < 0)) {
-                console.log('<span style="color:rgb(0,250,0)">' + name + ' Just spawn. JOBS = builder </span>');
+                if (Settings.CENSUS_LOG) {
+                    console.log('<span style="color:rgb(0,250,0)">' + name + ' Just spawn. JOBS = builder </span>');
+                }
             }
         }
     }
